@@ -1,4 +1,4 @@
-# Example
+# Example Sentinel Policy Use With Vault Enterprise
 
 This example uses an HR department policy for KV storage in Vault.
 
