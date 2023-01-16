@@ -275,7 +275,7 @@ WARNING! The following warnings were returned from Vault:
 
 Key                  Value
 ---                  -----
-token                hvs.CAESIMScZkhavZB3mpm1fc7ZdIQ-snip
+token                hvs.snip
 token_accessor       8CAgAtcjosoKqARekxgWErjY
 token_duration       768h
 token_renewable      true
