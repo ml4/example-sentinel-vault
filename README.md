@@ -120,7 +120,7 @@ WARNING! The following warnings were returned from Vault:
 
 Key                  Value
 ---                  -----
-token                hvs.CAESIDM3hsxaoDjorJ5z05Xf0ZtF92ID_XbS9lGU1qodooUCGiAKHGh2cy41NThEYXpPeGJIWTJmQW1kZlBybEFrZngQdQ
+token                hvs.CAESIDM3hsxaoDjorJ5z05Xsnipf0ZtF92ID_XbS9lGU1qodooUCGiAKHGh2cy41NThEYXpPeGJIWTJmQW1kZlBybEFrZngQdQ
 token_accessor       UtCsU8wZiSxAS75em3Fu2503
 token_duration       768h
 token_renewable      true
