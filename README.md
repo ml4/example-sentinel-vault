@@ -140,7 +140,7 @@ again. Future Vault requests will automatically use this token.
 
 Key                  Value
 ---                  -----
-token                hvs.CAESIDM3hsxaoDjorJ5z05Xf0ZtF92ID_XbS9lGU1qodooUCGiAKHGh2cy41NThEYXpPeGJIWTJmQW1kZlBybEFrZngQdQ
+token                hvs.snip
 token_accessor       UtCsU8wZiSxAS75em3Fu2503
 token_duration       767h59m41s
 token_renewable      true
