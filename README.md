@@ -203,6 +203,7 @@ path "kv/data/accounting/*" {
 }
 $ popd
 
+## # write the endpoint while logged in with a privileged token
 $ vault kv put kv/accounting/general/sally social=987-654-abc
 ========== Secret Path ==========
 kv/data/accounting/general/sally
