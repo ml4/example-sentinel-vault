@@ -247,7 +247,7 @@ workdays = rule {
 	time.now.weekday > 0 and time.now.weekday < 6
 }
 
-# Expect requests to only happen in the hour before work hours (7:00 am - 8:00 am)
+## Expect requests to only happen in the hour before work hours (7:00 am - 8:00 am)
 ## useful for demonstration of limiting capabilities of Sentinel for Vault
 workhours = rule {
 	time.now.hour > 7 and time.now.hour < 8
