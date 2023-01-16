@@ -336,7 +336,7 @@ Note: specifying an override of the operation would have succeeded.
 
 ## Troubleshooting
 
-If you get an error 
+If you get an error like this:
 ```
 Error writing data to sys/policies/egp/hr_policy: Error making API request.
 
