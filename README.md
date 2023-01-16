@@ -5,6 +5,11 @@ This example uses an HR department policy for KV storage in Vault.
 Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have instantiated VAULT_TOKEN in your env, from this repo gitroot, install the base HR department example policy and mount the KV secrets engine and write an example kv while logged in with the root or equivalent token somewhere where entites with the hr_policy policy attached to their token will then be able to retrieve:
 
 ```bash
+sentinel test
+PASS - cidr-check.sentinel
+  PASS - test/cidr-check/fail.hcl
+  PASS - test/cidr-check/success.hcl
+
 unset VAULT_TOKEN                                    # this takes precedence over operations below
 pushd vault_acl_policies
 vault policy write hr_policy ./hr_policy.hcl
