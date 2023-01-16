@@ -65,6 +65,8 @@ custom_metadata    <nil>
 deletion_time      n/a
 destroyed          false
 version            1
+#
+## writing to path OK
 ```
 
 ### Apply EGP to HR Policy
