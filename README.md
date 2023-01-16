@@ -264,7 +264,7 @@ main = rule {
 
 ### SIT Accounting Business Hours Check EGP
 
-Now create a token with the `accounting_policy` attached:
+Create a token with the `accounting_policy` attached:
 
 ```bash
 $ vault token create -policy accounting_policy
