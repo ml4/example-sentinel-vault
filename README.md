@@ -183,7 +183,7 @@ This section only deals with the business hours checking EGP policy.  The EGP ch
 
 ### Apply Normal Vault ACL Policy and Test
 
-Go into the Vault ACL policies directory, log back in with a privileged token and apply the policy to Vault to allow token-holders to write to the path.
+Go into the Vault ACL policies directory, _log back in with a privileged token_ and apply the policy to Vault to allow token-holders to write to the path.
 
 ```bash
 $ pushd vault_acl_policies
