@@ -32,7 +32,7 @@ kv/           kv           kv_2787f70f           n/a
 sys/          system       system_3cde701e       system endpoints used for control, policy and debugging
 
 ## if you are using this repo for demo, check what EGPs are in place and tidy
-$ vault list sys/policies/egp                          # check to see if any policies are in place already
+$ vault list sys/policies/egp
 $ vault policy delete sys/policies/egp/hr_policy       # if you're tidying up
 $ vault policy delete sys/policies/egp/accounting_policy
 ```
