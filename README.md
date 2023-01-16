@@ -155,7 +155,7 @@ Now attempt to read from the path now managed by both normal Vault ACL policy an
 ip-10-0-13-29$ vault kv get kv/hr/employees/frank
 Error reading kv/data/hr/employees/frank: Error making API request.
 
-URL: GET https://eun1.dev-vault-pipe.pi-ccn.org:8200/v1/kv/data/hr/employees/frank
+URL: GET https://my-vault.com:8200/v1/kv/data/hr/employees/frank
 Code: 403. Errors:
 
 * 2 errors occurred:
