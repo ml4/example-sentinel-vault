@@ -31,10 +31,13 @@ identity/     identity     identity_3c08cf50     identity store
 kv/           kv           kv_2787f70f           n/a
 sys/          system       system_3cde701e       system endpoints used for control, policy and debugging
 
-## if you are using this repo for demo, check what EGPs are in place and tidy
+## if you are using this repo for demo, tidy up with a root token and these
 $ vault list sys/policies/egp
 $ vault policy delete sys/policies/egp/hr_policy
 $ vault policy delete sys/policies/egp/accounting_policy
+$ vault secrets disable kv
+$ vault delete sys/policies/egp/hr_policy
+$ vault delete sys/policies/egp/accounting_policy
 ```
 
 ## SIT CIDR Check Policy
