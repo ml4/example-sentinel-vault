@@ -221,7 +221,7 @@ version            1
 
 ### Apply EGP to Accounting Policy
 
-This EGP will restrict access based on hours. Apply the same method as before, but using a `soft mandatory` rather than a hard mandatory:
+This EGP will restrict access based on hours. Apply the same method as before, but using a `soft mandatory` rather than a `hard mandatory`:
 
 ```bash
 $ policy2=$(base64 ./business-hrs.sentinel)
