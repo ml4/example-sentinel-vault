@@ -83,7 +83,7 @@ Success! Data written to: sys/policies/egp/hr_policy
 ```
 
 Note governed paths match those in the [policy file](vault_acl_policies/hr_policy.hcl).
-Now read the policy back
+Read the policy back
 
 ```bash
 $ vault read sys/policies/egp/hr_policy
