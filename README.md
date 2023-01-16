@@ -109,7 +109,7 @@ main = rule {
 
 ### SIT HR CIDR Check EGP
 
-Now create a token with the hr_policy attached, login with it and attempt to read the path to Frank's information:
+Now create a token with the `hr_policy` attached, login with it and attempt to read the path to Frank's information:
 
 ```bash
 $ vault token create -policy hr_policy
