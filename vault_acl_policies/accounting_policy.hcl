@@ -1,7 +1,7 @@
-path "secret/accounting/*" {
+path "kv/accounting/*" {
   capabilities = ["read", "update", "list", "delete"]
 }
 
-path "secret/data/accounting/*" {
+path "kv/data/accounting/*" {
   capabilities = ["read", "update", "list", "delete"]
 }

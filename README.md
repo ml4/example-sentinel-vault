@@ -4,9 +4,12 @@ This example uses an HR department policy for KV storage in Vault. You need to t
 This file is an HCL representation of the knowledge expounded in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
 Credence to the HashiCorp Sentinel product, engineering and education teams.
 
+## Unit Test Sentinel Policies Locally
+
 Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have instantiated VAULT_TOKEN in your env, from this repo gitroot, install the base HR department example policy and mount the KV secrets engine and write an example kv while logged in with the root or equivalent token somewhere where entites with the hr_policy policy attached to their token will then be able to retrieve:
 
 ```bash
+cd example-sentinel-vault
 $ sentinel0.19.2-rc1 test
 PASS - business-hrs.sentinel
   PASS - test/business-hrs/fail.hcl
@@ -17,43 +20,56 @@ PASS - cidr-check.sentinel
 
 ## Main EGP Setup For CIDR Checking and business hours guard rails
 unset VAULT_TOKEN                                    # this takes precedence over operations below
-pushd vault_acl_policies
-vault policy write hr_policy ./hr_policy.hcl
-vault policy write accounting_policy ./accounting_policy.hcl
-vault policy list
-vault policy read hr_policy
-vault policy read accounting_policy
-popd
-
-vault secrets enable -path=secret kv
-Success! Enabled the kv secrets engine at: secret/
-
-vault kv put secret/hr/employees/frank social=123-456-789
-Success! Data written to: secret/hr/employees/frank
-
+vault login 		                                     # enter root or equivalent token for your dev instance
+vault secrets enable -version=2 kv                   # enable secrets engine at default path and check
 vault secrets list
 
 Path          Type         Accessor              Description
 ----          ----         --------              -----------
 cubbyhole/    cubbyhole    cubbyhole_ea86e0c0    per-token private secret storage
 identity/     identity     identity_3c08cf50     identity store
-secret/       kv           kv_9227c0a3           n/a
+kv/           kv           kv_2787f70f           n/a
 sys/          system       system_3cde701e       system endpoints used for control, policy and debugging
 
-vault kv get secret/hr/employees/frank
+vault list sys/policies/egp													      # check to see if any policies are in place already
+vault policy delete sys/policies/egp/hr_policy			      # if you're tidying up between demos
+vault policy delete sys/policies/egp/accounting_policy
+```
+
+## SIT CIDR Check Policy
+
+In this README, it might be easier to run through the system integration testing iteratively by policy to prove the usefulness of Vault Sentinel clearly.
+This section only deals with the CIDR check policy.  The next section will deal with business hour access management.
+
+### Apply Normal Vault ACL Policy and Test
+
+Go into the Vault ACL policies directory and apply the policy to Vault to allow token-holders to write to the path.
+
+```bash
+pushd vault_acl_policies
+vault policy write hr_policy ./hr_policy.hcl
+vault policy list
+vault policy read hr_policy
+popd
+
+vault kv put kv/hr/employees/frank social=123-456-789
+Success! Data written to: kv/hr/employees/frank
+
+vault kv get kv/hr/employees/frank
 ===== Data =====
 Key       Value
 ---       -----
 social    123-456-789
-
 ```
 
-We will then limit this path with an endpoint-governing policy. Next you need to base64 encode the policy file for ingress into vault.  Do this for both policies in this repo with:
+### Apply EGP To Paths In Above Policy
+
+We will then limit this path with an endpoint-governing policy. Next you need to base64 encode the policy file for ingress into Vault:
 
 ```bash
 pushd example
 policy=$(base64 ./cidr-check.sentinel)
-vault write sys/policies/egp/hr_policy policy="${policy}" paths="secret/hr/*,secret/data/hr/*" enforcement_level="hard-mandatory"
+vault write sys/policies/egp/hr_policy policy="${policy}" paths="kv/hr/*,kv/data/hr/*" enforcement_level="hard-mandatory"
 
 Success! Data written to: sys/policies/egp/hr_policy
 ```
@@ -74,7 +90,7 @@ it is because you need to purchase the Vault Enterprise Plus module to get acces
 Retrying:
 
 ```
-# vault write sys/policies/egp/hr_policy policy="${policy}" paths="secret/hr/*,secret/data/hr/*" enforcement_level="hard-mandatory"
+# vault write sys/policies/egp/hr_policy policy="${policy}" paths="kv/hr/*,kv/data/hr/*" enforcement_level="hard-mandatory"
 Success! Data written to: sys/policies/egp/hr_policy
 ```
 
@@ -85,14 +101,14 @@ Key                  Value
 ---                  -----
 enforcement_level    hard-mandatory
 name                 hr_policy
-paths                [secret/hr/* secret/data/hr/*]
+paths                [kv/hr/* kv/data/hr/*]
 policy               import "sockaddr"
 import "strings"
 
-# Only care about create, list, update, and delete operations against secret path
+# Only care about create, list, update, and delete operations against kv path
 precond = rule {
 	request.operation in ["create", "list", "update", "delete"] and
-	strings.has_prefix(request.path, "secret/")
+	strings.has_prefix(request.path, "kv/")
 }
 
 # Requests to come only from our private IP range
@@ -104,13 +120,57 @@ cidrcheck = rule {
 main = rule when precond {
 	cidrcheck
 }
+```
+
+### SIT EGP
+
+Now create a token with the hr_policy attached, login with it and attempt to write to the path:
+
+```bash
+vault token create -policy hr_policy
+
+$ vault token create -policy hr_policy
+WARNING! The following warnings were returned from Vault:
+
+  * Endpoint ignored these unrecognized parameters: [display_name entity_alias
+  explicit_max_ttl num_uses period policies renewable ttl type]
+
+Key                  Value
+---                  -----
+token                hvs.blah
+token_accessor       ua96Doy7WnrCvLDwX48pOpGz
+token_duration       768h
+token_renewable      true
+token_policies       ["default" "hr_policy"]
+identity_policies    []
+policies             ["default" "hr_policy"]
+```
+
+```bash
+
+```
+
+
+--------------------------------------------------------------
+
+
+
+
+vault policy write accounting_policy ./accounting_policy.hcl
+vault policy read accounting_policy
+
+Success! Enabled the kv secrets engine at: kv/
+
+
+```
+
 
 ```
 
 Repeat the process for the business hours checks:
 ```bash
 policy2=$(base64 business-hrs.sentinel)
-vault write sys/policies/egp/business-hrs policy="${policy2}" paths="secret/accounting/*" enforcement_level="soft-mandatory"  # note soft-mandatory on this one
+vault write sys/policies/egp/business-hrs policy="${policy2}" paths="kv/accounting/*" enforcement_level="soft-mandatory"  # note soft-mandatory on this one
 ```
 
 Ensure it is accepted OK:
@@ -120,7 +180,7 @@ Key                  Value
 ---                  -----
 enforcement_level    soft-mandatory
 name                 business-hrs
-paths                [secret/accounting/*]
+paths                [kv/accounting/*]
 policy               import "time"
 
 # Expect requests to only happen during work days (Monday through Friday)
@@ -139,17 +199,9 @@ main = rule {
 }
 ```
 
-Write data at the pertinent path in your Vault instance with:
+Create token with the accounting team policy, login in with the token and attempt to write to the path in your Vault instance with:
 ```bash
-vault kv put secret/accounting/test acct_no="293472309423"
-```
-
-
-Now create a token with the hr_policy attached:
-```bash
-vault token create policy hr_policy
-
-$ vault token create -policy hr_policy
+vault token create -policy accounting_policy
 WARNING! The following warnings were returned from Vault:
 
   * Endpoint ignored these unrecognized parameters: [display_name entity_alias
@@ -157,36 +209,14 @@ WARNING! The following warnings were returned from Vault:
 
 Key                  Value
 ---                  -----
-token                hvs.CAESIFYhaz65JXwkEUoUo-XL0v7N54JC7E3B_xYzgLQKpu-sGiAKHGh2cy52ajV3c1ZLeGRqeGFqM0tZNVVRb0pBMWUQKA
-token_accessor       ua96Doy7WnrCvLDwX48pOpGz
+token                hvs.blah
+token_accessor       aHQCcNME7ZpuUrvqcH3xWhOV
 token_duration       768h
 token_renewable      true
-token_policies       ["default" "hr_policy"]
+token_policies       ["accounting_policy" "default"]
 identity_policies    []
-policies             ["default" "hr_policy"]
+policies             ["accounting_policy" "default"]
+
+vault kv put kv/accounting/test acct_no="293472309423"
 ```
-
-Now login to Vault using the above token
-```bash
-vault login
-Token (will be hidden):
-WARNING! The VAULT_TOKEN environment variable is set! The value of this
-variable will take precedence; if this is unwanted please unset VAULT_TOKEN or
-update its value accordingly.
-
-Success! You are now authenticated. The token information displayed below
-is already stored in the token helper. You do NOT need to run "vault login"
-again. Future Vault requests will automatically use this token.
-
-Key                  Value
----                  -----
-token                hvs.CAESIFYhaz65JXwkEUoUo-XL0v7N54JC7E3B_xYzgLQKpu-sGiAKHGh2cy52ajV3c1ZLeGRqeGFqM0tZNVVRb0pBMWUQKA
-token_accessor       ua96Doy7WnrCvLDwX48pOpGz
-token_duration       767h58m59s
-token_renewable      true
-token_policies       ["default" "hr_policy"]
-identity_policies    []
-policies             ["default" "hr_policy"]
-```
-
 

@@ -4,6 +4,6 @@ global "request" {
       remote_addr = "10.0.13.29"
     }
     operation = "create"
-    path = "secret/orders"
+    path = "kv/orders"
   }
 }

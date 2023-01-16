@@ -1,7 +1,7 @@
-path "secret/hr/*" {
+path "kv/hr/*" {
   capabilities = ["read", "update", "list", "delete"]
 }
 
-path "secret/data/hr/*" {
+path "kv/data/hr/*" {
   capabilities = ["read", "update", "list", "delete"]
 }
