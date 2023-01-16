@@ -20,7 +20,7 @@ PASS - cidr-check.sentinel
 
 ## Main EGP Setup For CIDR Checking and business hours guard rails
 $ unset VAULT_TOKEN                                    # this takes precedence over operations below
-$ vault login 		                                     # enter root or equivalent token for your dev instance
+$ vault login                                          # enter root or equivalent token for your dev instance
 $ vault secrets enable -version=2 kv                   # enable secrets engine at default path and check
 $ vault secrets list
 
