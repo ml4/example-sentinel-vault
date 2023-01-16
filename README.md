@@ -183,7 +183,7 @@ This section only deals with the business hours checking EGP policy.  The EGP ch
 
 ### Apply Normal Vault ACL Policy and Test
 
-If following this whole README, go into the Vault ACL policies directory and _log back in with a privileged token_. and apply the policy to Vault to allow token-holders to read from an Accounting team path. Write such a path:
+If following this whole README, go into the Vault ACL policies directory and _log back in with a privileged token_. Apply the policy to Vault to allow token-holders to read from an Accounting team path. Write such a path:
 
 ```bash
 $ pushd vault_acl_policies
