@@ -335,7 +335,7 @@ Note: specifying an override of the operation would have succeeded.
 
 ### Overrides
 
-As this EGP has been applied with a level of `soft ory`
+As this EGP has been applied with a level of `soft-mandatory`
 
 ## Troubleshooting
 
