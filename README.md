@@ -1,15 +1,21 @@
 # Example Sentinel Policy Use With Vault Enterprise
 
-This example uses an HR department policy for KV storage in Vault.
+This example uses an HR department policy for KV storage in Vault. You need to test this repo with sentinel0.19.2-rc1. A known issue exists 0.19.1.
+This file is an HCL representation of the knowledge expounded in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
+Credence to the HashiCorp Sentinel product, engineering and education teams.
 
 Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have instantiated VAULT_TOKEN in your env, from this repo gitroot, install the base HR department example policy and mount the KV secrets engine and write an example kv while logged in with the root or equivalent token somewhere where entites with the hr_policy policy attached to their token will then be able to retrieve:
 
 ```bash
-sentinel test
+$ sentinel0.19.2-rc1 test
+PASS - business-hrs.sentinel
+  PASS - test/business-hrs/fail.hcl
+  PASS - test/business-hrs/success.hcl
 PASS - cidr-check.sentinel
   PASS - test/cidr-check/fail.hcl
   PASS - test/cidr-check/success.hcl
 
+## Main EGP Setup For CIDR Checking
 unset VAULT_TOKEN                                    # this takes precedence over operations below
 pushd vault_acl_policies
 vault policy write hr_policy ./hr_policy.hcl
@@ -40,7 +46,7 @@ social    123-456-789
 
 ```
 
-We will then limit this path with an endpoint-governing policy. Next you need to base64 encode the policy file for ingress into vault.  Do this with:
+We will then limit this path with an endpoint-governing policy. Next you need to base64 encode the policy file for ingress into vault.  Do this for both policies in this repo with:
 
 ```bash
 pushd example
@@ -98,6 +104,44 @@ main = rule when precond {
 }
 
 ```
+
+Repeat the process for the business hours checks:
+```bash
+policy2=$(base64 business-hrs.sentinel)
+vault write sys/policies/egp/business-hrs policy="${policy2}" paths="secret/accounting/*" enforcement_level="soft-mandatory"  # note soft-mandatory on this one
+```
+
+Ensure it is accepted OK:
+```bash
+# vault read sys/policies/egp/business-hrs
+Key                  Value
+---                  -----
+enforcement_level    soft-mandatory
+name                 business-hrs
+paths                [secret/accounting/*]
+policy               import "time"
+
+# Expect requests to only happen during work days (Monday through Friday)
+# 0 for Sunday and 6 for Saturday
+workdays = rule {
+	time.now.weekday > 0 and time.now.weekday < 6
+}
+
+# Expect requests to only happen during work hours (7:00 am - 6:00 pm)
+workhours = rule {
+	time.now.hour > 7 and time.now.hour < 18
+}
+
+main = rule {
+	workdays and workhours
+}
+```
+
+Write data at the pertinent path in your Vault instance with:
+```bash
+vault kv put secret/accounting/test acct_no="293472309423"
+```
+
 
 Now create a token with the hr_policy attached:
 ```bash
