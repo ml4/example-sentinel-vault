@@ -77,7 +77,7 @@ We will then limit this path with an endpoint-governing policy in this repo. Fir
 $ policy=$(base64 ./cidr-check.sentinel)
 $ vault write sys/policies/egp/hr_policy policy="${policy}" \
   paths="kv/hr/*,kv/data/hr/*"                              \
-	enforcement_level="hard-mandatory"
+  enforcement_level="hard-mandatory"
 
 Success! Data written to: sys/policies/egp/hr_policy
 ```
