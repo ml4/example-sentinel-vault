@@ -1,6 +1,6 @@
 # Example Sentinel Policy Use With Vault Enterprise
 
-This example uses fictitious HR and Accounting department policy for KV storage access in Vault and provides step-by-step instructions on how to use Sentinel Endpoint Governing Policies with Vault Enterprise Plus to extend the standard Vault ACL policy engine weith applied examples from the documentation in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
+This example uses fictitious HR and Accounting department policy for KV storage access in Vault and provides step-by-step instructions on how to use Sentinel Endpoint Governing Policies with Vault Enterprise Plus to extend the standard Vault ACL policy engine with applied examples from the documentation in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
 
 You current are recommended to test this repo with Sentinel 0.18.x or Sentinel 0.19.2-rc1. A known issue exists 0.19.1.  Credence to the HashiCorp Sentinel product, engineering and education teams.
 
