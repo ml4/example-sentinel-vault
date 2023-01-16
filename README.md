@@ -71,7 +71,7 @@ version            1
 
 ### Apply EGP to HR Policy
 
-We will then limit this path with an endpoint-governing policy in this repo. First, base64 encode the policy file then ingress into Vault:
+We will then limit this path with an endpoint-governing policy in this repo. First, base64 encode the policy file then write to Vault:
 
 ```bash
 $ policy=$(base64 ./cidr-check.sentinel)
