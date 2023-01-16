@@ -241,8 +241,8 @@ name                 accounting_policy
 paths                [kv/accounting/* kv/data/accounting/*]
 policy               import "time"
 
-# Expect requests to only happen during work days (Monday through Friday)
-# 0 for Sunday and 6 for Saturday
+## Expect requests to only happen during work days (Monday through Friday)
+## 0 for Sunday and 6 for Saturday
 workdays = rule {
 	time.now.weekday > 0 and time.now.weekday < 6
 }
