@@ -2,7 +2,7 @@ mock "time" {
   data = {
     now = {
       weekday = 1
-      hour    = 12
+      hour    = 7
     }
   }
 }
