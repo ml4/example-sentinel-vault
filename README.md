@@ -295,7 +295,7 @@ again. Future Vault requests will automatically use this token.
 
 Key                  Value
 ---                  -----
-token                hvs.CAESIMScZkhavZB3mpm1fc7ZdIQ-IjrWahlnFlJhfQQMZNngGiAKHGh2cy5zZG1TaVBVb3pBVEV6b2wzaE9wUGg3bVQQfg
+token                hvs.snip
 token_accessor       8CAgAtcjosoKqARekxgWErjY
 token_duration       767h59m40s
 token_renewable      true
