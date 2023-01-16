@@ -42,7 +42,7 @@ $ vault policy delete sys/policies/egp/accounting_policy
 In this README, it will be easier to run through the system integration testing iteratively by policy to prove the usefulness of Vault Sentinel clearly.
 This section only deals with the CIDR check policy.  The next section will deal with business hour access management.
 
-### Apply Normal Vault ACL Policy and Test
+Apply Normal Vault ACL Policy and Test
 
 Go into the Vault ACL policies directory and apply the policy to Vault to allow token-holders to write to the path.
 
