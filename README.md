@@ -357,7 +357,8 @@ Key       Value
 social    987-654-abc
 ```
 
-Care should thus be taken with assigning levels to Sentinel 
+Care should thus be taken with assigning levels to Vault Sentinel policies.
+
 ## Troubleshooting
 
 If you get an error like this:
