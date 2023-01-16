@@ -305,7 +305,7 @@ Now attempt to read from the path now managed by both normal Vault ACL policy an
 $ vault kv get kv/accounting/general/sally
 Error reading kv/data/accounting/general/sally: Error making API request.
 
-URL: GET https://eun1.dev-vault-pipe.pi-ccn.org:8200/v1/kv/data/accounting/general/sally
+URL: GET https://my-vault.com:8200/v1/kv/data/accounting/general/sally
 Code: 403. Errors:
 
 * 2 errors occurred:
@@ -335,7 +335,7 @@ If you get the error
 ```
 Error writing data to sys/policies/egp/hr_policy: Error making API request.
 
-URL: PUT https://eun1.dev-vault-pipe.pi-ccn.org:8200/v1/sys/policies/egp/hr_policy
+URL: PUT https://my-vault.com:8200/v1/sys/policies/egp/hr_policy
 Code: 401. Errors:
 
 * 1 error occurred:
