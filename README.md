@@ -46,6 +46,7 @@ This section only deals with the CIDR check policy.  The next section will deal 
 
 Go into the Vault ACL policies directory and apply the policy to Vault to allow token-holders to write to the path.
 
+
 ```bash
 $ pushd vault_acl_policies
 $ vault policy write hr_policy ./hr_policy.hcl
