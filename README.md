@@ -264,7 +264,7 @@ main = rule {
 
 ### SIT Accounting Business Hours Check EGP
 
-Now create a token with the accounting_policy attached, login with it and attempt to read the path to Sally's information:
+Now create a token with the `accounting_policy` attached, login with it and attempt to read the path to Sally's information:
 
 ```bash
 $ vault token create -policy accounting_policy
