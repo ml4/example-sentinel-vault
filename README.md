@@ -337,6 +337,23 @@ Note: specifying an override of the operation would have succeeded.
 
 As this EGP has been applied with a level of `soft-mandatory`, it can be overridden with:
 
+$ vault kv get -policy-override  kv/accounting/general/sally
+========== Secret Path ==========
+kv/data/accounting/general/sally
+
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2023-01-16T19:49:49.081462414Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            1
+
+===== Data =====
+Key       Value
+---       -----
+social    987-654-abc
 
 
 ## Troubleshooting
