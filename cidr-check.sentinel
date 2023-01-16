@@ -3,7 +3,7 @@ import "strings"
 
 # Requests to come only from our private IP range
 cidrcheck = rule {
-	sockaddr.is_contained(request.connection.remote_addr, "192.168.0.1/24")
+	sockaddr.is_contained(request.connection.remote_addr, "10.0.0.0/8")
 }
 
 main = rule {
