@@ -299,7 +299,7 @@ token                hvs.snip
 token_accessor       8CAgAtcjosoKqARekxgWErjY
 token_duration       767h59m40s
 token_renewable      true
-token_policies       ["accounting_policy" "default"]
+token_policies       ["accounting_policy" "default"]    
 identity_policies    []
 policies             ["accounting_policy" "default"]
 ```
