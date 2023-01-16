@@ -1,12 +1,12 @@
 # Example Sentinel Policy Use With Vault Enterprise
 
-This example uses an HR department policy for KV storage in Vault. You need to test this repo with sentinel0.19.2-rc1. A known issue exists 0.19.1.
-This file is an HCL representation of the knowledge expounded in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
-Credence to the HashiCorp Sentinel product, engineering and education teams.
+This example uses fictitious HR and Accounting department policy for KV storage access in Vault and provides step-by-step instructions on how to use Sentinel Endpoint Governing Policies with Vault Enterprise Plus to extend the standard Vault ACL policy engine weith applied examples from the documentation in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
+
+You need to test this repo with sentinel0.19.2-rc1. A known issue exists 0.19.1.  Credence to the HashiCorp Sentinel product, engineering and education teams.
 
 ## Unit Test Sentinel Policies Locally
 
-Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have instantiated VAULT_TOKEN in your env, from this repo gitroot, install the base HR department example policy and mount the KV secrets engine and write an example kv while logged in with the root or equivalent token somewhere where entites with the hr_policy policy attached to their token will then be able to retrieve:
+Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have _unset_ VAULT_TOKEN in your env, from this repo gitroot, install the base HR department example policy and mount the KV secrets engine and write an example kv while logged in with the root or equivalent token somewhere where entites with the hr_policy policy attached to their token will then be able to retrieve:
 
 ```bash
 $ cd example-sentinel-vault
