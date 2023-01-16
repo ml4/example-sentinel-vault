@@ -1,7 +1,7 @@
 global "request" {
   value = {
     connection = {
-      remote_addr = "192.168.0.1/24"
+      remote_addr = "10.0.0.0/8"
     }
     operation = "create"
     path      = "kv/orders"
