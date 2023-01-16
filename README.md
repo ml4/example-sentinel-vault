@@ -304,7 +304,7 @@ identity_policies    []
 policies             ["accounting_policy" "default"]
 ```
 
-Now attempt to read from the path now managed by both normal Vault ACL policy and also the EGP:
+Attempt to read from the path now managed by both normal Vault ACL policy and also the EGP:
 
 ```bash
 $ vault kv get kv/accounting/general/sally
