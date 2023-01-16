@@ -180,6 +180,7 @@ Now the EGP is in place, Vault will use Sentinel to manage requests to the paths
 ## SIT Business Hours Policy
 
 This section only deals with the business hours checking EGP policy.  The EGP checks to see what time it is, and if the time is outside the time specified in the EGP, the attempt to access the endpoint fails.
+
 # Apply Normal Vault ACL Policy and Test
 Go into the Vault ACL policies directory, log back in with a privileged token and apply the policy to Vault to allow token-holders to write to the path.
 
