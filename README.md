@@ -15,12 +15,14 @@ PASS - cidr-check.sentinel
   PASS - test/cidr-check/fail.hcl
   PASS - test/cidr-check/success.hcl
 
-## Main EGP Setup For CIDR Checking
+## Main EGP Setup For CIDR Checking and business hours guard rails
 unset VAULT_TOKEN                                    # this takes precedence over operations below
 pushd vault_acl_policies
 vault policy write hr_policy ./hr_policy.hcl
+vault policy write accounting_policy ./accounting_policy.hcl
 vault policy list
 vault policy read hr_policy
+vault policy read accounting_policy
 popd
 
 vault secrets enable -path=secret kv
