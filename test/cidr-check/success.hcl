@@ -10,6 +10,6 @@ global "request" {
 
 test {
   rules = {
-    main    = false
+    main    = true
   }
 }
