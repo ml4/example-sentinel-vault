@@ -284,7 +284,7 @@ identity_policies    []
 policies             ["accounting_policy" "default"]
 ```
 
-Now login with the token and confirm the policy attached is the accounting_policy:
+Now login with the token and confirm the policy attached is the `accounting_policy`:
 
 ```bash
 $ vault login
