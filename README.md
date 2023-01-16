@@ -337,6 +337,7 @@ Note: specifying an override of the operation would have succeeded.
 
 As this EGP has been applied with a level of `soft-mandatory`, it can be overridden with:
 
+```bash
 $ vault kv get -policy-override  kv/accounting/general/sally
 ========== Secret Path ==========
 kv/data/accounting/general/sally
