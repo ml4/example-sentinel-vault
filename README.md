@@ -79,7 +79,7 @@ $ vault write sys/policies/egp/hr_policy policy="${policy}" paths="kv/hr/*,kv/da
 
 Success! Data written to: sys/policies/egp/hr_policy
 #
-## note governed paths 
+## note governed paths match those in the policy vile
 ```
 
 Now try reading the policy back
