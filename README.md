@@ -44,7 +44,7 @@ This section only deals with the CIDR check policy.  The next section will deal 
 
 ### Apply Normal Vault ACL Policy and Test
 
-Go into the Vault ACL policies directory and apply the basic Vault ACL policy to Vault to allow token-holders to write to the path.
+Go into the Vault ACL policies directory and apply the basic ACL policy to Vault to allow token-holders to write to the path.
 Most command line responses are not shown for brevity.
 
 ```bash
