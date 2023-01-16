@@ -192,7 +192,7 @@ Token (will be hidden):
 Success! You are now authenticated.
 ...
 $ vault policy write accounting_policy ./accounting_policy.hcl
-$ vault policy list                                     # ensure accounting_policy is present
+$ vault policy list                                             # ensure accounting_policy is present
 $ vault policy read accounting_policy
 path "kv/accounting/*" {
   capabilities = ["read", "update", "list", "delete"]
