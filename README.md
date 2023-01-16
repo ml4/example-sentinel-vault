@@ -6,7 +6,7 @@ You current are recommended to test this repo with Sentinel 0.18.x or Sentinel 0
 
 ## Unit Test Sentinel Policies Locally
 
-Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have _unset_ VAULT_TOKEN in your env, from this repo gitroot, install the base example policies, mount the KV secrets engine and write an example kv while logged in with a privileged token as below.  We do not recommend keeping the root token once you have set up a Vault instance
+Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew etc. deployment), and have _unset_ VAULT_TOKEN in your env, from this repo gitroot, install the base example policies, mount the KV secrets engine and write an example kv while logged in with a privileged token as below.  We do not recommend keeping the root token once you have set up a Vault instance.
 
 ```bash
 $ cd example-sentinel-vault
