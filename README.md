@@ -33,7 +33,7 @@ sys/          system       system_3cde701e       system endpoints used for contr
 
 ## if you are using this repo for demo, check what EGPs are in place and tidy
 $ vault list sys/policies/egp
-$ vault policy delete sys/policies/egp/hr_policy       # if you're tidying up
+$ vault policy delete sys/policies/egp/hr_policy
 $ vault policy delete sys/policies/egp/accounting_policy
 ```
 
