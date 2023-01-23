@@ -32,7 +32,7 @@ kv/           kv           kv_2787f70f           n/a
 sys/          system       system_3cde701e       system endpoints used for control, policy and debugging
 
 ## if you are using this repo for demo, tidy up with a root token and these
-$ vault list sys/policies/egp
+$ vault list sys/policies/egp                              # if Feature Not Enabled, see Troubleshooting below.  If Permission Denied, check your token.
 $ vault policy delete sys/policies/egp/hr_policy
 $ vault policy delete sys/policies/egp/accounting_policy
 $ vault secrets disable kv
