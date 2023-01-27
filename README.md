@@ -2,7 +2,7 @@
 
 This example uses fictitious HR and Accounting department policy for KV storage access in Vault and provides step-by-step instructions on how to use Sentinel Endpoint Governing Policies with Vault Enterprise Plus to extend the standard Vault ACL policy engine with applied examples from the documentation in [this HashiCorp tutorial on the subject](https://developer.hashicorp.com/vault/tutorials/policies/sentinel#write-sentinel-policies).
 
-You current are recommended to test this repo with Sentinel 0.18.x or [Sentinel 0.19.2-rc1](https://releases.hashicorp.com/sentinel/0.19.2-rc1/). A known issue exists 0.19.1.  Credence to the HashiCorp Sentinel product, engineering and education teams.
+You current are recommended to test this repo with Sentinel 0.18.x or Sentinel 0.19.2. A known issue exists 0.19.1.  Credence to the HashiCorp Sentinel product, engineering and education teams.
 
 ## Unit Test Sentinel Policies Locally
 
@@ -10,7 +10,7 @@ Once you have access to your Vault Enterprise instance (i.e. not an OSS/homebrew
 
 ```bash
 $ cd example-sentinel-vault
-$ sentinel0.19.2-rc1 test
+$ sentinel test
 PASS - business-hrs.sentinel
   PASS - test/business-hrs/fail.hcl
   PASS - test/business-hrs/success.hcl
