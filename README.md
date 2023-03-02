@@ -19,10 +19,10 @@ PASS - cidr-check.sentinel
   PASS - test/cidr-check/success.hcl
 
 ## Main EGP Setup For CIDR Checking and business hours guard rails
-$ unset VAULT_TOKEN                        # this takes precedence over operations below
-$ vault login                              # enter root or equivalent token for your dev instance
-$ vault secrets enable -version=2 kv       # enable secrets engine at default path and check
-$ vault secrets list
+unset VAULT_TOKEN                        # this takes precedence over operations below
+vault login                              # enter root or equivalent token for your dev instance
+vault secrets enable -version=2 kv       # enable secrets engine at default path and check
+vault secrets list
 
 Path          Type         Accessor              Description
 ----          ----         --------              -----------
@@ -31,13 +31,6 @@ identity/     identity     identity_3c08cf50     identity store
 kv/           kv           kv_2787f70f           n/a
 sys/          system       system_3cde701e       system endpoints used for control, policy and debugging
 
-## if you are using this repo for demo, tidy up with a root token and these
-$ vault list sys/policies/egp                              # if Feature Not Enabled, see Troubleshooting below.  If Permission Denied, check your token.
-$ vault policy delete sys/policies/egp/hr_policy
-$ vault policy delete sys/policies/egp/accounting_policy
-$ vault secrets disable kv
-$ vault delete sys/policies/egp/hr_policy
-$ vault delete sys/policies/egp/accounting_policy
 ```
 
 ## SIT CIDR Check Policy
@@ -50,11 +43,11 @@ This section only deals with the CIDR check policy.  The next section will deal 
 Go into the Vault ACL policies directory and apply the basic ACL policy to Vault to allow token-holders to write to the path.  Most command line responses are not shown for brevity.
 
 ```bash
-$ pushd vault_acl_policies
-$ vault policy write hr_policy ./hr_policy.hcl
-$ vault policy list
-$ vault policy read hr_policy
-$ popd
+pushd vault_acl_policies
+vault policy write hr_policy ./hr_policy.hcl
+vault policy list
+vault policy read hr_policy
+popd
 
 $ vault kv put kv/hr/employees/frank social=123-456-789
 ======= Secret Path =======
@@ -255,7 +248,7 @@ workdays = rule {
 ## Useful for demonstration of limiting capabilities of Sentinel for Vault
 #
 workhours = rule {
-	time.now.hour > 7 and time.now.hour < 8
+	time.now.hour > 2 and time.now.hour < 3
 }
 
 main = rule {
@@ -361,6 +354,19 @@ social    987-654-abc
 ```
 
 Care should thus be taken with assigning levels to Vault Sentinel policies.
+
+## Clean up
+Run these in commands to tidy up for the next demo.
+
+```bash
+## if you are using this repo for demo, tidy up with a root token and these
+vault list sys/policies/egp                              # if Feature Not Enabled, see Troubleshooting below.  If Permission Denied, check your token.
+vault policy delete sys/policies/egp/hr_policy
+vault policy delete sys/policies/egp/accounting_policy
+vault secrets disable kv
+vault delete sys/policies/egp/hr_policy
+vault delete sys/policies/egp/accounting_policy
+```
 
 ## Troubleshooting
 
